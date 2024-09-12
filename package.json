@@ -9,9 +9,9 @@
     "ios": "expo start --ios",
     "web": "expo start --web",
     "test": "jest --watchAll",
-    "lint": "expo lint",
-    "linter": "eslint --fix",
-    "format": "prettier --write"
+    "expo:lint": "expo lint",
+    "lint": "eslint --fix",
+    "format": "prettier ./**/*.{ts,tsx,json,css} --write"
   },
   "jest": {
     "preset": "jest-expo"
