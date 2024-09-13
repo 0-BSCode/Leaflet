@@ -59,7 +59,6 @@ const styles = StyleSheet.create({
   mainContainer: {
     flex: 1,
     alignItems: "center",
-    marginHorizontal: PAGE_MARGIN,
   },
   progressBar: {
     height: "15%",
