@@ -1,6 +1,6 @@
 import { CardDto } from "@/dto/Card.dto";
 
-const Cards: CardDto = [
+const Cards: CardDto[] = [
   {
     id: "1",
     front: "What is 2 + 2?",
@@ -57,3 +57,5 @@ const Cards: CardDto = [
     back: "14",
   },
 ];
+
+export default Cards;
