@@ -17,7 +17,7 @@ const AUTOPLAY_INTERVAL = 5000;
 export const CardDeck: React.FC<CardDeckProps> = ({ deckData }) => {
   const deckSize = deckData.length;
   const [isPlaying, setIsPlaying] = React.useState<boolean>(false);
-  const [currentPage, setCurrentPage] = React.useState<number>(1);
+  const [currentPage, setCurrentPage] = React.useState<number>(INITIAL_PAGE);
   const pagerRef = React.createRef<PagerView>();
   const { pause, resume } = useTimer(
     () => setCurrentPage((prev) => (prev + 1) % deckSize),
@@ -25,15 +25,14 @@ export const CardDeck: React.FC<CardDeckProps> = ({ deckData }) => {
   );
 
   const handlePageChange = (position: number) => {
-    if (position === 0) {
-      setCurrentPage(deckSize);
-    } else if (position === deckSize + 1) {
-      setCurrentPage(1);
-    }
+    setCurrentPage(position);
   };
 
   useEffect(() => {
     pagerRef.current?.setPage(currentPage);
+    if (currentPage === deckSize - 1) {
+      setIsPlaying(false);
+    }
   }, [currentPage]);
 
   useEffect(() => {
@@ -55,12 +54,9 @@ export const CardDeck: React.FC<CardDeckProps> = ({ deckData }) => {
           style={styles.setContainer}
           pageMargin={PAGE_MARGIN}
         >
-          {/* clones are for looping again */}
-          <Card data={deckData[deckSize - 1]} key={"last-clone"} />
           {deckData.map((cardData, _) => (
             <Card data={cardData} key={cardData.id} />
           ))}
-          <Card data={deckData[0]} key={"first-clone"} />
         </PagerView>
       </View>
       <Text>{currentPage}</Text>
@@ -72,22 +68,14 @@ export const CardDeck: React.FC<CardDeckProps> = ({ deckData }) => {
               name="pause"
               size={30}
               color="black"
-              // onPress={() => setIsPlaying(false)}
-              onPress={() => {
-                pause();
-                setIsPlaying(false);
-              }}
+              onPress={() => setIsPlaying(false)}
             />
           ) : (
             <Ionicons
               name="play"
               size={30}
               color="black"
-              // onPress={() => setIsPlaying(true)}
-              onPress={() => {
-                resume();
-                setIsPlaying(true);
-              }}
+              onPress={() => setIsPlaying(true)}
             />
           )}
         </View>
