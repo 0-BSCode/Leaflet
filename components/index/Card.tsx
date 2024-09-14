@@ -1,35 +1,35 @@
-import React, { useState } from "react";
-import { View, StyleSheet, Pressable, Text } from "react-native";
+import React from "react";
+import { View, StyleSheet, Text } from "react-native";
 import { CardDto } from "@/dto/Card.dto";
+import FlipCard from "react-native-flip-card";
 
 interface CardProps {
   data: CardDto;
 }
 
 export const Card: React.FC<CardProps> = ({ data: { front, back } }) => {
-  const [isFlipped, setIsFlipped] = useState<boolean>(false);
-  const [content, setContent] = useState<string>(front);
-
-  const onFlip = () => {
-    setIsFlipped(!isFlipped);
-    setContent(isFlipped ? front : back);
-  };
-
   return (
-    <Pressable onPress={onFlip} style={styles.cardContainer}>
+    <FlipCard
+      style={styles.cardContainer}
+      friction={8}
+      perspective={1000}
+      flipHorizontal={true}
+      flipVertical={false}
+    >
       <View style={styles.textContainer}>
-        <Text style={styles.cardText}>{content}</Text>
+        <Text style={styles.cardText}>{front}</Text>
       </View>
-    </Pressable>
+      <View style={styles.textContainer}>
+        <Text style={styles.cardText}>{back}</Text>
+      </View>
+    </FlipCard>
   );
 };
 
 const styles = StyleSheet.create({
   cardContainer: {
-    flex: 1,
-
+    flexShrink: 1,
     flexDirection: "row",
-    justifyContent: "center",
     alignItems: "center",
   },
   textContainer: {
@@ -40,6 +40,7 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     flexDirection: "row",
     justifyContent: "center",
+    alignSelf: "center",
     alignItems: "center",
   },
   cardText: {
