@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React from "react";
 import { View, StyleSheet } from "react-native";
 import { CardDto } from "@/dto/Card.dto";
 import { Card } from "./Card";
@@ -28,7 +28,7 @@ export const CardDeck: React.FC<CardDeckProps> = ({ deckData }) => {
       <View style={styles.progressBar}></View>
       <View style={styles.setContainer}>
         <PagerView
-          initialPage={0}
+          initialPage={1}
           ref={pagerRef}
           onPageSelected={(e) => handlePageChange(e.nativeEvent.position)}
           style={styles.setContainer}
