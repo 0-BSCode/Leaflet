@@ -2,14 +2,22 @@ import React from "react";
 import { View, StyleSheet, Animated } from "react-native";
 import { Card } from "./Card";
 
-export const ShufflePlaceholder: React.FC = () => {
+interface ShufflePlaceholderProps {
+  duration: number;
+}
+
+const SMOOTHING_DURATION = 125;
+
+export const ShufflePlaceholder: React.FC<ShufflePlaceholderProps> = ({
+  duration,
+}) => {
   const spinValue = new Animated.Value(0);
 
   React.useEffect(() => {
     Animated.loop(
       Animated.timing(spinValue, {
         toValue: 1,
-        duration: 1000,
+        duration: duration + SMOOTHING_DURATION,
         useNativeDriver: true,
       }),
     ).start();
