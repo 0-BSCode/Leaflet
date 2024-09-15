@@ -19,6 +19,7 @@ export function ThemedText({
   return (
     <Text
       style={[
+        styles.baseText,
         { color },
         type === "default" ? styles.default : undefined,
         type === "title" ? styles.title : undefined,
@@ -33,6 +34,9 @@ export function ThemedText({
 }
 
 const styles = StyleSheet.create({
+  baseText: {
+    fontFamily: "Poppins-Regular",
+  },
   default: {
     fontFamily: "Poppins-Bold",
     fontSize: 16,
