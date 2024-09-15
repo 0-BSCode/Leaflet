@@ -1,5 +1,6 @@
 import React, { createContext, useState, useContext, ReactNode } from "react";
-import { useColorScheme } from "react-native";
+import { useColorScheme, View, ActivityIndicator } from "react-native";
+import { useFonts } from "expo-font";
 
 // Define the shape of our context
 interface ThemeContextType {
@@ -18,6 +19,22 @@ interface ThemeProviderProps {
 export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
   const systemColorScheme = useColorScheme();
   const [isDark, setIsDark] = useState(systemColorScheme === "dark");
+  const [fontsLoaded, fontError] = useFonts({
+    "Poppins-Regular": require("../assets/fonts/Poppins-Regular.ttf"),
+    "Poppins-Bold": require("../assets/fonts/Poppins-Bold.ttf"),
+  });
+
+  if (!fontsLoaded) {
+    if (fontError) {
+      console.error("Font loading error:", fontError);
+      return null; // Or render an error state
+    }
+    return (
+      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+        <ActivityIndicator size="large" />
+      </View>
+    );
+  }
 
   return (
     <ThemeContext.Provider value={{ isDark, setIsDark }}>
