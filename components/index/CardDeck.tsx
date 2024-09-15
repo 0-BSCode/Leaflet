@@ -8,6 +8,8 @@ import { useTimer } from "@/hooks/useTimer";
 import { ShufflePlaceholder } from "./ShufflePlaceholder";
 import { ThemedView } from "../ThemedView";
 import { ThemedText } from "../ThemedText";
+import { Colors } from "@/constants/Colors";
+import { ThemedIcon } from "../ThemedIcons";
 
 interface CardDeckProps {
   deckData: CardDto[];
@@ -63,21 +65,14 @@ export const CardDeck: React.FC<CardDeckProps> = ({ deckData }) => {
 
   return (
     <ThemedView lightColor="#000" style={styles.mainContainer}>
-      <View style={styles.progressBar}>
+      <ThemedView style={styles.progressBarContainer}>
         <ThemedText style={styles.progressText} type="subtitle">
           {currentPage + 1}/{deckSize}
         </ThemedText>
-        <View
-          style={{
-            width: "100%",
-            height: 24,
-            borderRadius: 60,
-            backgroundColor: "blue",
-          }}
-        >
-          <View
+        <ThemedView style={styles.progressBar}>
+          <ThemedView
             style={{
-              backgroundColor: "cyan",
+              // backgroundColor: "cyan",
               height: "100%",
               width: `${((currentPage + 1) / deckSize) * 100}%`,
               borderTopLeftRadius: 60,
@@ -85,10 +80,11 @@ export const CardDeck: React.FC<CardDeckProps> = ({ deckData }) => {
               borderTopRightRadius: currentPage + 1 === deckSize ? 60 : 0,
               borderBottomRightRadius: currentPage + 1 === deckSize ? 60 : 0,
             }}
+            type="secondaryBackground"
           />
-        </View>
-      </View>
-      <View style={styles.setContainer}>
+        </ThemedView>
+      </ThemedView>
+      <ThemedView style={styles.setContainer}>
         {isShuffling ? (
           <ShufflePlaceholder duration={SHUFFLE_DURATION} />
         ) : (
@@ -104,35 +100,20 @@ export const CardDeck: React.FC<CardDeckProps> = ({ deckData }) => {
             ))}
           </PagerView>
         )}
-      </View>
+      </ThemedView>
 
-      <View style={styles.controlsContainer}>
-        <View style={styles.button}>
+      <ThemedView style={styles.controlsContainer}>
+        <ThemedView style={styles.button}>
           {isPlaying ? (
-            <Ionicons
-              name="pause"
-              size={32}
-              color="black"
-              onPress={() => setIsPlaying(false)}
-            />
+            <ThemedIcon name="pause" onPress={() => setIsPlaying(false)} />
           ) : (
-            <Ionicons
-              name="play"
-              size={32}
-              color="black"
-              onPress={() => setIsPlaying(true)}
-            />
+            <ThemedIcon name="play" onPress={() => setIsPlaying(true)} />
           )}
-        </View>
-        <View style={styles.button}>
-          <Ionicons
-            name="shuffle"
-            size={32}
-            color="black"
-            onPress={handleShuffle}
-          />
-        </View>
-      </View>
+        </ThemedView>
+        <ThemedView style={styles.button}>
+          <ThemedIcon name="shuffle" onPress={handleShuffle} />
+        </ThemedView>
+      </ThemedView>
     </ThemedView>
   );
 };
@@ -147,21 +128,29 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
   },
   progressText: {},
-  progressBar: {
+  progressBarContainer: {
     paddingVertical: 32,
     paddingHorizontal: 24,
     display: "flex",
     alignItems: "center",
     rowGap: 12,
     width: "100%",
-    backgroundColor: "grey",
+    // backgroundColor: "grey",
+  },
+  progressBar: {
+    width: "100%",
+    height: 24,
+    borderRadius: 60,
+    // TODO: Prevent from using Colors directly
+    borderColor: Colors.light.secondaryBackground,
+    borderWidth: 1,
   },
   setContainer: {
-    margin: 160,
+    paddingVertical: 100,
     flex: 1,
     height: "100%",
     width: "100%",
-    backgroundColor: "grey",
+    // backgroundColor: "grey",
   },
   pagerView: {
     flex: 1,
@@ -169,10 +158,10 @@ const styles = StyleSheet.create({
     height: "100%",
     justifyContent: "center",
     alignContent: "center",
-    backgroundColor: "green",
+    // backgroundColor: "green",
   },
   controlsContainer: {
-    backgroundColor: "green",
+    // backgroundColor: "green",
     flexDirection: "row",
     justifyContent: "space-between",
     width: "100%",
@@ -183,7 +172,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     height: 75,
     width: 75,
-    backgroundColor: "white",
+    // backgroundColor: "white",
     borderRadius: 100,
   },
 });
