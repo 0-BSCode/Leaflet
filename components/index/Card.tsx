@@ -46,9 +46,9 @@ const styles = StyleSheet.create({
     paddingHorizontal: 12,
   },
   textContainer: {
-    height: "100%",
+    height: "90%",
     width: "100%",
-    borderRadius: 8,
+    borderRadius: 30,
 
     flexDirection: "row",
     justifyContent: "center",
