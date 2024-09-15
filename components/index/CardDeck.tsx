@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { View, StyleSheet, Text } from "react-native";
+import { StyleSheet } from "react-native";
 import { CardDto } from "@/dto/Card.dto";
 import { Card } from "./Card";
-import { Ionicons } from "@expo/vector-icons";
 import PagerView from "react-native-pager-view";
 import { useTimer } from "@/hooks/useTimer";
 import { ShufflePlaceholder } from "./ShufflePlaceholder";
