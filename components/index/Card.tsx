@@ -31,6 +31,7 @@ const styles = StyleSheet.create({
     flexShrink: 1,
     flexDirection: "row",
     alignItems: "center",
+    backgroundColor: "yellow",
   },
   textContainer: {
     height: 300,

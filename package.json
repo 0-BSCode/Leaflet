@@ -12,7 +12,8 @@
     "expo:lint": "expo lint",
     "lint": "eslint --fix",
     "format": "prettier ./**/*.{ts,tsx,json,css} --write",
-    "prepare": "husky"
+    "prepare": "husky",
+    "devtools": "react-devtools"
   },
   "jest": {
     "preset": "jest-expo"
@@ -59,6 +60,7 @@
     "jest-expo": "~51.0.3",
     "lint-staged": "^15.2.10",
     "prettier": "^3.3.3",
+    "react-devtools": "^5.3.1",
     "react-test-renderer": "18.2.0",
     "typescript": "~5.3.3"
   },

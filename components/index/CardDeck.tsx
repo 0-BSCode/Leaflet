@@ -61,7 +61,7 @@ export const CardDeck: React.FC<CardDeckProps> = ({ deckData }) => {
 
   return (
     <View style={styles.mainContainer}>
-      <View style={styles.progressBar}></View>
+      {/* <View style={styles.progressBar}></View> */}
       <View style={styles.setContainer}>
         {isShuffling ? (
           <ShufflePlaceholder duration={SHUFFLE_DURATION} />
@@ -115,6 +115,10 @@ const styles = StyleSheet.create({
   mainContainer: {
     flex: 1,
     alignItems: "center",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "space-between",
+    backgroundColor: "blue",
   },
   progressBar: {
     height: "15%",
@@ -125,11 +129,12 @@ const styles = StyleSheet.create({
     width: "100%",
     justifyContent: "center",
     alignContent: "center",
+    backgroundColor: "grey",
   },
   controlsContainer: {
+    backgroundColor: "green",
     flexDirection: "row",
-    justifyContent: "space-around",
-    height: "15%",
+    justifyContent: "space-between",
     width: "100%",
   },
   button: {
