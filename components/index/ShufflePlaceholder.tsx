@@ -1,12 +1,10 @@
 import React from "react";
-import { View, StyleSheet, Animated } from "react-native";
+import { View, StyleSheet, Animated, Easing } from "react-native";
 import { Card } from "./Card";
 
 interface ShufflePlaceholderProps {
   duration: number;
 }
-
-const SMOOTHING_DURATION = 125;
 
 export const ShufflePlaceholder: React.FC<ShufflePlaceholderProps> = ({
   duration,
@@ -14,13 +12,12 @@ export const ShufflePlaceholder: React.FC<ShufflePlaceholderProps> = ({
   const spinValue = new Animated.Value(0);
 
   React.useEffect(() => {
-    Animated.loop(
-      Animated.timing(spinValue, {
-        toValue: 1,
-        duration: duration + SMOOTHING_DURATION,
-        useNativeDriver: true,
-      }),
-    ).start();
+    Animated.timing(spinValue, {
+      toValue: 1,
+      duration: duration,
+      easing: Easing.linear,
+      useNativeDriver: true,
+    }).start();
   }, []);
 
   const spin = spinValue.interpolate({
@@ -30,7 +27,9 @@ export const ShufflePlaceholder: React.FC<ShufflePlaceholderProps> = ({
 
   return (
     <View style={styles.container}>
-      <Animated.View style={{ transform: [{ rotateX: spin }] }}>
+      <Animated.View
+        style={[styles.container, { transform: [{ rotateX: spin }] }]}
+      >
         <Card data={{ id: "placeholder", front: "", back: "" }} />
       </Animated.View>
     </View>
@@ -40,7 +39,9 @@ export const ShufflePlaceholder: React.FC<ShufflePlaceholderProps> = ({
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    width: "100%",
+    height: "100%",
     justifyContent: "center",
-    alignItems: "center",
+    alignContent: "center",
   },
 });
