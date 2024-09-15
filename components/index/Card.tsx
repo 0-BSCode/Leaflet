@@ -28,15 +28,15 @@ export const Card: React.FC<CardProps> = ({ data: { front, back } }) => {
 
 const styles = StyleSheet.create({
   cardContainer: {
-    flexShrink: 1,
     flexDirection: "row",
     alignItems: "center",
-    backgroundColor: "yellow",
+    backgroundColor: "black",
+    paddingHorizontal: 12,
   },
   textContainer: {
-    height: 300,
-    width: 300,
-    borderRadius: 30,
+    height: "100%",
+    width: "100%",
+    borderRadius: 8,
 
     backgroundColor: "white",
     flexDirection: "row",

@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, Text } from "react-native";
 import { CardDto } from "@/dto/Card.dto";
 import { Card } from "./Card";
 import { Ionicons } from "@expo/vector-icons";
 import PagerView from "react-native-pager-view";
 import { useTimer } from "@/hooks/useTimer";
 import { ShufflePlaceholder } from "./ShufflePlaceholder";
+import { ThemedView } from "../ThemedView";
+import { ThemedText } from "../ThemedText";
 
 interface CardDeckProps {
   deckData: CardDto[];
@@ -60,8 +62,32 @@ export const CardDeck: React.FC<CardDeckProps> = ({ deckData }) => {
   }, [isPlaying]);
 
   return (
-    <View style={styles.mainContainer}>
-      {/* <View style={styles.progressBar}></View> */}
+    <ThemedView lightColor="#000" style={styles.mainContainer}>
+      <View style={styles.progressBar}>
+        <ThemedText style={styles.progressText} type="subtitle">
+          {currentPage + 1}/{deckSize}
+        </ThemedText>
+        <View
+          style={{
+            width: "100%",
+            height: 24,
+            borderRadius: 60,
+            backgroundColor: "blue",
+          }}
+        >
+          <View
+            style={{
+              backgroundColor: "cyan",
+              height: "100%",
+              width: `${((currentPage + 1) / deckSize) * 100}%`,
+              borderTopLeftRadius: 60,
+              borderBottomLeftRadius: 60,
+              borderTopRightRadius: currentPage + 1 === deckSize ? 60 : 0,
+              borderBottomRightRadius: currentPage + 1 === deckSize ? 60 : 0,
+            }}
+          />
+        </View>
+      </View>
       <View style={styles.setContainer}>
         {isShuffling ? (
           <ShufflePlaceholder duration={SHUFFLE_DURATION} />
@@ -70,7 +96,7 @@ export const CardDeck: React.FC<CardDeckProps> = ({ deckData }) => {
             initialPage={INITIAL_PAGE}
             ref={pagerRef}
             onPageSelected={(e) => handlePageChange(e.nativeEvent.position)}
-            style={styles.setContainer}
+            style={styles.pagerView}
             pageMargin={PAGE_MARGIN}
           >
             {deck.map((cardData) => (
@@ -85,14 +111,14 @@ export const CardDeck: React.FC<CardDeckProps> = ({ deckData }) => {
           {isPlaying ? (
             <Ionicons
               name="pause"
-              size={30}
+              size={32}
               color="black"
               onPress={() => setIsPlaying(false)}
             />
           ) : (
             <Ionicons
               name="play"
-              size={30}
+              size={32}
               color="black"
               onPress={() => setIsPlaying(true)}
             />
@@ -101,41 +127,56 @@ export const CardDeck: React.FC<CardDeckProps> = ({ deckData }) => {
         <View style={styles.button}>
           <Ionicons
             name="shuffle"
-            size={30}
+            size={32}
             color="black"
             onPress={handleShuffle}
           />
         </View>
       </View>
-    </View>
+    </ThemedView>
   );
 };
 
 const styles = StyleSheet.create({
   mainContainer: {
     flex: 1,
+    width: "100%",
     alignItems: "center",
     display: "flex",
     flexDirection: "column",
     justifyContent: "space-between",
-    backgroundColor: "blue",
   },
+  progressText: {},
   progressBar: {
-    height: "15%",
+    paddingVertical: 32,
+    paddingHorizontal: 24,
+    display: "flex",
+    alignItems: "center",
+    rowGap: 12,
     width: "100%",
+    backgroundColor: "grey",
   },
   setContainer: {
+    margin: 160,
+    flex: 1,
+    height: "100%",
+    width: "100%",
+    backgroundColor: "grey",
+  },
+  pagerView: {
     flex: 1,
     width: "100%",
+    height: "100%",
     justifyContent: "center",
     alignContent: "center",
-    backgroundColor: "grey",
+    backgroundColor: "green",
   },
   controlsContainer: {
     backgroundColor: "green",
     flexDirection: "row",
     justifyContent: "space-between",
     width: "100%",
+    paddingHorizontal: 24,
   },
   button: {
     justifyContent: "center",

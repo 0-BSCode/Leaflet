@@ -4,8 +4,8 @@ import { StyleSheet, View } from "react-native";
 export function Navbar() {
   return (
     <View style={styles.container}>
-      <Ionicons name="help" size={24} />
-      <Ionicons name="sunny-outline" size={24} />
+      <Ionicons name="help" size={36} />
+      <Ionicons name="sunny-outline" size={36} />
     </View>
   );
 }
