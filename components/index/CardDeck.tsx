@@ -11,6 +11,7 @@ interface CardDeckProps {
 }
 
 const PAGE_MARGIN = 20;
+const SHUFFLE_DURATION = 750;
 
 export const CardDeck: React.FC<CardDeckProps> = ({ deckData }) => {
   const [deck, setDeck] = useState<CardDto[]>(deckData);
@@ -33,7 +34,7 @@ export const CardDeck: React.FC<CardDeckProps> = ({ deckData }) => {
     setIsShuffling(true);
     setDeck(newDeck);
 
-    await new Promise((resolve) => setTimeout(resolve, 950));
+    await new Promise((resolve) => setTimeout(resolve, SHUFFLE_DURATION));
     setIsShuffling(false);
   };
 
@@ -42,7 +43,7 @@ export const CardDeck: React.FC<CardDeckProps> = ({ deckData }) => {
       <View style={styles.progressBar}></View>
       <View style={styles.setContainer}>
         {isShuffling ? (
-          <ShufflePlaceholder />
+          <ShufflePlaceholder duration={SHUFFLE_DURATION} />
         ) : (
           <PagerView
             initialPage={1}
