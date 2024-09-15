@@ -67,7 +67,7 @@ export const CardDeck: React.FC<CardDeckProps> = ({ deckData }) => {
           <ShufflePlaceholder duration={SHUFFLE_DURATION} />
         ) : (
           <PagerView
-            initialPage={1}
+            initialPage={INITIAL_PAGE}
             ref={pagerRef}
             onPageSelected={(e) => handlePageChange(e.nativeEvent.position)}
             style={styles.setContainer}
