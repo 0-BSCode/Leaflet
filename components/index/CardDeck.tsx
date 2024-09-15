@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { View, StyleSheet } from "react-native";
+import { StyleSheet } from "react-native";
 import { CardDto } from "@/dto/Card.dto";
 import { Card } from "./Card";
-import { Ionicons } from "@expo/vector-icons";
 import PagerView from "react-native-pager-view";
 import { useTimer } from "@/hooks/useTimer";
 import { ShufflePlaceholder } from "./ShufflePlaceholder";
+import { ThemedView } from "../ThemedView";
+import { ThemedText } from "../ThemedText";
+import { Colors } from "@/constants/Colors";
+import { ThemedIcon } from "../ThemedIcons";
 
 interface CardDeckProps {
   deckData: CardDto[];
@@ -60,9 +63,26 @@ export const CardDeck: React.FC<CardDeckProps> = ({ deckData }) => {
   }, [isPlaying]);
 
   return (
-    <View style={styles.mainContainer}>
-      <View style={styles.progressBar}></View>
-      <View style={styles.setContainer}>
+    <ThemedView lightColor="#000" style={styles.mainContainer}>
+      <ThemedView style={styles.progressBarContainer}>
+        <ThemedText style={styles.progressText} type="subtitle">
+          {currentPage + 1}/{deckSize}
+        </ThemedText>
+        <ThemedView style={styles.progressBar}>
+          <ThemedView
+            style={{
+              height: "100%",
+              width: `${((currentPage + 1) / deckSize) * 100}%`,
+              borderTopLeftRadius: 60,
+              borderBottomLeftRadius: 60,
+              borderTopRightRadius: currentPage + 1 === deckSize ? 60 : 0,
+              borderBottomRightRadius: currentPage + 1 === deckSize ? 60 : 0,
+            }}
+            type="secondaryBackground"
+          />
+        </ThemedView>
+      </ThemedView>
+      <ThemedView style={styles.setContainer}>
         {isShuffling ? (
           <ShufflePlaceholder duration={SHUFFLE_DURATION} />
         ) : (
@@ -70,7 +90,7 @@ export const CardDeck: React.FC<CardDeckProps> = ({ deckData }) => {
             initialPage={INITIAL_PAGE}
             ref={pagerRef}
             onPageSelected={(e) => handlePageChange(e.nativeEvent.position)}
-            style={styles.setContainer}
+            style={styles.pagerView}
             pageMargin={PAGE_MARGIN}
           >
             {deck.map((cardData) => (
@@ -78,66 +98,74 @@ export const CardDeck: React.FC<CardDeckProps> = ({ deckData }) => {
             ))}
           </PagerView>
         )}
-      </View>
+      </ThemedView>
 
-      <View style={styles.controlsContainer}>
-        <View style={styles.button}>
+      <ThemedView style={styles.controlsContainer}>
+        <ThemedView style={styles.button}>
           {isPlaying ? (
-            <Ionicons
-              name="pause"
-              size={30}
-              color="black"
-              onPress={() => setIsPlaying(false)}
-            />
+            <ThemedIcon name="pause" onPress={() => setIsPlaying(false)} />
           ) : (
-            <Ionicons
-              name="play"
-              size={30}
-              color="black"
-              onPress={() => setIsPlaying(true)}
-            />
+            <ThemedIcon name="play" onPress={() => setIsPlaying(true)} />
           )}
-        </View>
-        <View style={styles.button}>
-          <Ionicons
-            name="shuffle"
-            size={30}
-            color="black"
-            onPress={handleShuffle}
-          />
-        </View>
-      </View>
-    </View>
+        </ThemedView>
+        <ThemedView style={styles.button}>
+          <ThemedIcon name="shuffle" onPress={handleShuffle} />
+        </ThemedView>
+      </ThemedView>
+    </ThemedView>
   );
 };
 
 const styles = StyleSheet.create({
   mainContainer: {
     flex: 1,
+    width: "100%",
     alignItems: "center",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "space-between",
+  },
+  progressText: {},
+  progressBarContainer: {
+    paddingVertical: 32,
+    paddingHorizontal: 24,
+    display: "flex",
+    alignItems: "center",
+    rowGap: 12,
+    width: "100%",
   },
   progressBar: {
-    height: "15%",
     width: "100%",
+    height: 24,
+    borderRadius: 60,
+    // TODO: Prevent from using Colors directly
+    borderColor: Colors.light.secondaryBackground,
+    borderWidth: 1,
   },
   setContainer: {
+    paddingVertical: 100,
+    flex: 1,
+    height: "100%",
+    width: "100%",
+  },
+  pagerView: {
     flex: 1,
     width: "100%",
+    height: "100%",
     justifyContent: "center",
     alignContent: "center",
   },
   controlsContainer: {
     flexDirection: "row",
-    justifyContent: "space-around",
-    height: "15%",
+    justifyContent: "space-between",
     width: "100%",
+    paddingHorizontal: 24,
   },
   button: {
     justifyContent: "center",
     alignItems: "center",
     height: 75,
     width: 75,
-    backgroundColor: "white",
     borderRadius: 100,
   },
 });

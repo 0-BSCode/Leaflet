@@ -1,7 +1,10 @@
 import React from "react";
-import { View, StyleSheet, Text } from "react-native";
+import { StyleSheet } from "react-native";
 import { CardDto } from "@/dto/Card.dto";
 import FlipCard from "react-native-flip-card";
+import { ThemedText } from "../ThemedText";
+import { ThemedView } from "../ThemedView";
+import { Colors } from "@/constants/Colors";
 
 interface CardProps {
   data: CardDto;
@@ -16,34 +19,43 @@ export const Card: React.FC<CardProps> = ({ data: { front, back } }) => {
       flipHorizontal={true}
       flipVertical={false}
     >
-      <View style={styles.textContainer}>
-        <Text style={styles.cardText}>{front}</Text>
-      </View>
-      <View style={styles.textContainer}>
-        <Text style={styles.cardText}>{back}</Text>
-      </View>
+      <ThemedView
+        style={styles.textContainer}
+        lightColor={Colors.light.tertiaryBackground}
+        darkColor={Colors.dark.secondaryBackground}
+      >
+        <ThemedText style={styles.cardText} type="default">
+          {front}
+        </ThemedText>
+      </ThemedView>
+      <ThemedView
+        style={styles.textContainer}
+        lightColor={Colors.light.tertiaryBackground}
+        darkColor={Colors.dark.secondaryBackground}
+      >
+        <ThemedText style={styles.cardText}>{back}</ThemedText>
+      </ThemedView>
     </FlipCard>
   );
 };
 
 const styles = StyleSheet.create({
   cardContainer: {
-    flexShrink: 1,
     flexDirection: "row",
     alignItems: "center",
+    paddingHorizontal: 12,
   },
   textContainer: {
-    height: 300,
-    width: 300,
-    borderRadius: 30,
+    height: "100%",
+    width: "100%",
+    borderRadius: 8,
 
-    backgroundColor: "white",
     flexDirection: "row",
     justifyContent: "center",
-    alignSelf: "center",
     alignItems: "center",
   },
   cardText: {
-    fontSize: 30,
+    fontSize: 32,
+    lineHeight: 36,
   },
 });
