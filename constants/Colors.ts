@@ -5,9 +5,6 @@
 
 import { ThemeDto } from "@/dto/Theme.dto";
 
-const tintColorLight = "#0a7ea4";
-const tintColorDark = "#fff";
-
 export const Colors: { light: ThemeDto; dark: ThemeDto } = {
   light: {
     text: "#283618",
@@ -15,11 +12,6 @@ export const Colors: { light: ThemeDto; dark: ThemeDto } = {
     primaryBackground: "#FFFFFF",
     secondaryBackground: "#606C38",
     tertiaryBackground: "#eee",
-
-    tint: tintColorLight,
-    icon: "#687076",
-    tabIconDefault: "#687076",
-    tabIconSelected: tintColorLight,
   },
   dark: {
     text: "#fff",
@@ -27,10 +19,5 @@ export const Colors: { light: ThemeDto; dark: ThemeDto } = {
     primaryBackground: "#1F1F1F",
     secondaryBackground: "#606C38",
     tertiaryBackground: "#FEFAE0",
-
-    tint: tintColorDark,
-    icon: "#9BA1A6",
-    tabIconDefault: "#9BA1A6",
-    tabIconSelected: tintColorDark,
   },
 };

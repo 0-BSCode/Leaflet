@@ -72,7 +72,6 @@ export const CardDeck: React.FC<CardDeckProps> = ({ deckData }) => {
         <ThemedView style={styles.progressBar}>
           <ThemedView
             style={{
-              // backgroundColor: "cyan",
               height: "100%",
               width: `${((currentPage + 1) / deckSize) * 100}%`,
               borderTopLeftRadius: 60,
@@ -135,7 +134,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     rowGap: 12,
     width: "100%",
-    // backgroundColor: "grey",
   },
   progressBar: {
     width: "100%",
@@ -150,7 +148,6 @@ const styles = StyleSheet.create({
     flex: 1,
     height: "100%",
     width: "100%",
-    // backgroundColor: "grey",
   },
   pagerView: {
     flex: 1,
@@ -158,10 +155,8 @@ const styles = StyleSheet.create({
     height: "100%",
     justifyContent: "center",
     alignContent: "center",
-    // backgroundColor: "green",
   },
   controlsContainer: {
-    // backgroundColor: "green",
     flexDirection: "row",
     justifyContent: "space-between",
     width: "100%",
@@ -172,7 +167,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     height: 75,
     width: 75,
-    // backgroundColor: "white",
     borderRadius: 100,
   },
 });

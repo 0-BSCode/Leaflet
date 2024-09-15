@@ -4,8 +4,4 @@ export class ThemeDto {
   primaryBackground!: string;
   secondaryBackground!: string;
   tertiaryBackground!: string;
-  tint!: string;
-  icon!: string;
-  tabIconDefault!: string;
-  tabIconSelected!: string;
 }

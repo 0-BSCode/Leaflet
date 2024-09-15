@@ -1,4 +1,3 @@
-import { Ionicons } from "@expo/vector-icons";
 import { useTheme } from "@/context/Theme.context";
 import { StyleSheet, View } from "react-native";
 import { ThemedIcon } from "../ThemedIcons";
@@ -7,8 +6,7 @@ export function Navbar() {
   const { isDark, setIsDark } = useTheme();
   return (
     <View style={styles.container}>
-      {/* <Ionicons name="help" size={36} /> */}
-      <ThemedIcon name="help" />
+      <View />
       {isDark && (
         <ThemedIcon name="moon-outline" onPress={() => setIsDark(!isDark)} />
       )}
@@ -25,6 +23,5 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     padding: 12,
     width: "100%",
-    // backgroundColor: "red",
   },
 });

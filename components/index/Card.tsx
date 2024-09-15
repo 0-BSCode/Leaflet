@@ -43,7 +43,6 @@ const styles = StyleSheet.create({
   cardContainer: {
     flexDirection: "row",
     alignItems: "center",
-    // backgroundColor: "black",
     paddingHorizontal: 12,
   },
   textContainer: {
@@ -51,7 +50,6 @@ const styles = StyleSheet.create({
     width: "100%",
     borderRadius: 8,
 
-    // backgroundColor: "white",
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
