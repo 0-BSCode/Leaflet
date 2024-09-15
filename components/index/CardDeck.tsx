@@ -12,7 +12,7 @@ interface CardDeckProps {
 }
 
 const PAGE_MARGIN = 20;
-const INITIAL_PAGE = 1;
+const INITIAL_PAGE = 0;
 const AUTOPLAY_INTERVAL = 5000;
 const SHUFFLE_DURATION = 750;
 
@@ -73,11 +73,9 @@ export const CardDeck: React.FC<CardDeckProps> = ({ deckData }) => {
             style={styles.setContainer}
             pageMargin={PAGE_MARGIN}
           >
-            <View />
             {deck.map((cardData) => (
               <Card data={cardData} key={cardData.id} />
             ))}
-            <View />
           </PagerView>
         )}
       </View>
