@@ -49,15 +49,21 @@ export const CardDeck: React.FC<CardDeckProps> = ({ deckData }) => {
 
   useEffect(() => {
     pagerRef.current?.setPage(currentPage);
-
     if (currentPage === deckSize - 1) {
       setIsPlaying(false);
-    } else if (isPlaying) {
+    }
+  }, [currentPage]);
+
+  useEffect(() => {
+    if (isPlaying) {
       resume();
+      if (currentPage === deckSize - 1) {
+        setCurrentPage(0);
+      }
     } else {
       pause();
     }
-  }, [currentPage, isPlaying, deckSize]);
+  }, [isPlaying]);
 
   return (
     <ThemedView lightColor="#000" style={styles.mainContainer}>
