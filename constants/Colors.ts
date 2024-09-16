@@ -8,15 +8,15 @@ import { ThemeDto } from "@/dto/Theme.dto";
 export const Colors: { light: ThemeDto; dark: ThemeDto } = {
   light: {
     text: "#283618",
-    background: "#fff",
-    primaryBackground: "#FFFFFF",
+    background: "#FFFFFF",
+    primaryBackground: "#EBEBEB",
     secondaryBackground: "#606C38",
     tertiaryBackground: "#eee",
   },
   dark: {
     text: "#fff",
     background: "#1F1F1F",
-    primaryBackground: "#1F1F1F",
+    primaryBackground: "#283618",
     secondaryBackground: "#606C38",
     tertiaryBackground: "#FEFAE0",
   },

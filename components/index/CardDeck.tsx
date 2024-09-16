@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { StyleSheet } from "react-native";
+import React, { useState, useEffect, useRef } from "react";
+import { StyleSheet, Animated } from "react-native";
 import { CardDto } from "@/dto/Card.dto";
 import { Card } from "./Card";
 import PagerView from "react-native-pager-view";
@@ -7,8 +7,8 @@ import { useTimer } from "@/hooks/useTimer";
 import { ShufflePlaceholder } from "./ShufflePlaceholder";
 import { ThemedView } from "../ThemedView";
 import { ThemedText } from "../ThemedText";
-import { Colors } from "@/constants/Colors";
 import { ThemedIcon } from "../ThemedIcons";
+import { ProgressBar } from "./ProgressBar";
 
 interface CardDeckProps {
   deckData: CardDto[];
@@ -26,6 +26,7 @@ export const CardDeck: React.FC<CardDeckProps> = ({ deckData }) => {
   const [currentPage, setCurrentPage] = React.useState<number>(INITIAL_PAGE);
 
   const deckSize = deckData.length;
+  const isLastCard = currentPage === deckSize - 1;
   const pagerRef = React.createRef<PagerView>();
   const { pause, resume } = useTimer(
     () => setCurrentPage((prev) => (prev + 1) % deckSize),
@@ -43,13 +44,19 @@ export const CardDeck: React.FC<CardDeckProps> = ({ deckData }) => {
     setIsShuffling(true);
     setDeck(newDeck);
 
+    if (isPlaying) {
+      // pause when shuffling
+      setIsPlaying(false);
+      pause();
+    }
+
     await new Promise((resolve) => setTimeout(resolve, SHUFFLE_DURATION));
     setIsShuffling(false);
   };
 
   useEffect(() => {
     pagerRef.current?.setPage(currentPage);
-    if (currentPage === deckSize - 1) {
+    if (isLastCard) {
       setIsPlaying(false);
     }
   }, [currentPage]);
@@ -57,6 +64,10 @@ export const CardDeck: React.FC<CardDeckProps> = ({ deckData }) => {
   useEffect(() => {
     if (isPlaying) {
       resume();
+      if (isLastCard) {
+        // restart deck when autoplayed on last card
+        setCurrentPage(0);
+      }
     } else {
       pause();
     }
@@ -68,19 +79,7 @@ export const CardDeck: React.FC<CardDeckProps> = ({ deckData }) => {
         <ThemedText style={styles.progressText} type="subtitle">
           {currentPage + 1}/{deckSize}
         </ThemedText>
-        <ThemedView style={styles.progressBar}>
-          <ThemedView
-            style={{
-              height: "100%",
-              width: `${((currentPage + 1) / deckSize) * 100}%`,
-              borderTopLeftRadius: 60,
-              borderBottomLeftRadius: 60,
-              borderTopRightRadius: currentPage + 1 === deckSize ? 60 : 0,
-              borderBottomRightRadius: currentPage + 1 === deckSize ? 60 : 0,
-            }}
-            type="secondaryBackground"
-          />
-        </ThemedView>
+        <ProgressBar currentPage={currentPage} deckSize={deckSize} />
       </ThemedView>
       <ThemedView style={styles.setContainer}>
         {isShuffling ? (
@@ -127,7 +126,8 @@ const styles = StyleSheet.create({
   },
   progressText: {},
   progressBarContainer: {
-    paddingVertical: 32,
+    paddingTop: 8,
+    paddingBottom: 16,
     paddingHorizontal: 24,
     display: "flex",
     alignItems: "center",
@@ -138,12 +138,8 @@ const styles = StyleSheet.create({
     width: "100%",
     height: 24,
     borderRadius: 60,
-    // TODO: Prevent from using Colors directly
-    borderColor: Colors.light.secondaryBackground,
-    borderWidth: 1,
   },
   setContainer: {
-    paddingVertical: 100,
     flex: 1,
     height: "100%",
     width: "100%",

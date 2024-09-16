@@ -1,5 +1,4 @@
 import { Text, type TextProps, StyleSheet } from "react-native";
-
 import { useThemeColor } from "@/hooks/useThemeColor";
 
 export type ThemedTextProps = TextProps & {
@@ -20,6 +19,7 @@ export function ThemedText({
   return (
     <Text
       style={[
+        styles.baseText,
         { color },
         type === "default" ? styles.default : undefined,
         type === "title" ? styles.title : undefined,
@@ -34,7 +34,11 @@ export function ThemedText({
 }
 
 const styles = StyleSheet.create({
+  baseText: {
+    fontFamily: "Poppins-Regular",
+  },
   default: {
+    fontFamily: "Poppins-Bold",
     fontSize: 16,
     lineHeight: 24,
   },
@@ -45,12 +49,12 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 32,
-    fontWeight: "bold",
+    fontFamily: "Poppins-Bold",
     lineHeight: 32,
   },
   subtitle: {
     fontSize: 20,
-    fontWeight: "bold",
+    fontFamily: "Poppins-Bold",
   },
   link: {
     lineHeight: 30,
