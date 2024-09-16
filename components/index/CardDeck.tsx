@@ -26,6 +26,7 @@ export const CardDeck: React.FC<CardDeckProps> = ({ deckData }) => {
   const [currentPage, setCurrentPage] = React.useState<number>(INITIAL_PAGE);
 
   const deckSize = deckData.length;
+  const isLastCard = currentPage === deckSize - 1;
   const pagerRef = React.createRef<PagerView>();
   const { pause, resume } = useTimer(
     () => setCurrentPage((prev) => (prev + 1) % deckSize),
@@ -43,13 +44,19 @@ export const CardDeck: React.FC<CardDeckProps> = ({ deckData }) => {
     setIsShuffling(true);
     setDeck(newDeck);
 
+    if (isPlaying) {
+      // pause when shuffling
+      setIsPlaying(false);
+      pause();
+    }
+
     await new Promise((resolve) => setTimeout(resolve, SHUFFLE_DURATION));
     setIsShuffling(false);
   };
 
   useEffect(() => {
     pagerRef.current?.setPage(currentPage);
-    if (currentPage === deckSize - 1) {
+    if (isLastCard) {
       setIsPlaying(false);
     }
   }, [currentPage]);
@@ -57,7 +64,8 @@ export const CardDeck: React.FC<CardDeckProps> = ({ deckData }) => {
   useEffect(() => {
     if (isPlaying) {
       resume();
-      if (currentPage === deckSize - 1) {
+      if (isLastCard) {
+        // restart deck when autoplayed on last card
         setCurrentPage(0);
       }
     } else {
