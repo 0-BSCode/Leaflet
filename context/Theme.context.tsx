@@ -1,6 +1,5 @@
 import React, { createContext, useState, useContext, ReactNode } from "react";
-import { useColorScheme, View, ActivityIndicator } from "react-native";
-import { useFonts } from "expo-font";
+import { useColorScheme } from "react-native";
 
 // Define the shape of our context
 interface ThemeContextType {
