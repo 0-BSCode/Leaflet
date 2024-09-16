@@ -1,50 +1,58 @@
-# Welcome to your Expo app 👋
+<h1 align="center" id="title">Leaflet</h1>
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+<p align="center"><img src="https://socialify.git.ci/0-BSCode/Leaflet/image?language=1&amp;name=1&amp;owner=1&amp;pattern=Solid&amp;stargazers=1&amp;theme=Dark" alt="project-image"></p>
 
-## Get started
+<p id="description">A simple flashcards application</p>
 
-1. Install dependencies
+<h2>🚀 Demo</h2>
 
-   ```bash
-   npm install
-   ```
+[![IMAGE ALT TEXT HERE](../docs/thumbnail.png)](https://youtu.be/nrBQJ88_cL4)
 
-2. Start the app
+<h2>Project Screenshots:</h2>
 
-   ```bash
-    npx expo start
-   ```
+<img src="../docs/Light Mode.png" alt="project-screenshot">
 
-In the output, you'll find options to open the app in a
+<img src="../docs/Dark Mode.png" alt="project-screenshot">
+  
+<h2>🧐 Features</h2>
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+Here're some of the project's best features:
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+*   Autoplay
+*   Shuffle
+*   Card Navigation
 
-## Get a fresh project
+<h2>🛠️ Installation Steps:</h2>
 
-When you're ready, run:
+<p>1. Clone the repo</p>
 
-```bash
-npm run reset-project
+```
+git clone https://github.com/0-BSCode/Leaflet.git
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+<p>2. Install packages</p>
 
-## Learn more
+```
+npm ci
+```
 
-To learn more about developing your project with Expo, look at the following resources:
+<p>3. Run project (on Android)</p>
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+```
+npm run android
+```
 
-## Join the community
+  
+  
+<h2>💻 Built with</h2>
 
-Join our community of developers creating universal apps.
+Technologies used in the project:
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+*   React Native
+*   Typescript
+*   Expo
+*   CSS
+
+<h2>🛡️ License:</h2>
+
+This project is licensed under the GNU General Public License
