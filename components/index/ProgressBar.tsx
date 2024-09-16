@@ -13,7 +13,6 @@ const ANIMATION_DURATION = 200;
 export const ProgressBar: React.FC<ProgressBarProps> = ({
   currentPage,
   deckSize,
-  borderRadius = 60,
 }) => {
   const progressAnimation = useRef(new Animated.Value(0)).current;
 
@@ -34,11 +33,6 @@ export const ProgressBar: React.FC<ProgressBarProps> = ({
             inputRange: [0, 100],
             outputRange: ["0%", "100%"],
           }),
-          borderTopLeftRadius: borderRadius,
-          borderBottomLeftRadius: borderRadius,
-          borderTopRightRadius: currentPage + 1 === deckSize ? borderRadius : 0,
-          borderBottomRightRadius:
-            currentPage + 1 === deckSize ? borderRadius : 0,
           overflow: "hidden",
         }}
       >
@@ -53,6 +47,7 @@ const styles = StyleSheet.create({
     width: "100%",
     height: 24,
     borderRadius: 60,
+    overflow: "hidden",
   },
   innerLine: {
     height: "100%",
